@@ -1,0 +1,105 @@
+{
+  "urn": "urn:uuid:1a73b240-e513-11e9-98a9-7d914542d225",
+  "version": "0.0.1",
+  "name": "openhim-mediator-ihris-dhis2-ug",
+  "description": "Moves Aggregate iHRIS Data to DHIS2",
+  "config": {
+    "dhis2": {
+      "password": "",
+      "username": "",
+      "url": "https://ihris-dhis2.dev.hispuganda.org/"
+    },
+    "ihris": {
+      "password": "",
+      "username": "",
+      "url": "http://hris.health.go.ug/districts_manage/"
+    }
+  },
+  "defaultChannelConfig": [
+    {
+      "name": "openhim-mediator-ihris-dhis2-ug",
+      "urlPattern": "/dhis/.*",
+      "alerts": [],
+      "txRerunAcl": [],
+      "txViewFullAcl": [],
+      "txViewAcl": [],
+      "properties": [],
+      "matchContentTypes": [],
+      "routes": [
+        {
+          "name": "openhim-mediator-ihris-dhis2-ug Route",
+          "host": "localhost",
+          "port": "4000",
+          "primary": true,
+          "type": "http"
+        }
+      ],
+      "allow": ["ihris"],
+      "type": "http"
+    }
+  ],
+  "configDefs": [{
+    "param": "dhis2",
+    "displayName": "DHIS2",
+    "description": "DHIS2 Server to send data to",
+    "type": "struct",
+    "template": [{
+        "type": "string",
+        "description": "The base URL (e.g. https://ihris-dhis2.dev.hispuganda.org/)",
+        "displayName": "Base URL",
+        "param": "url"
+      },
+      {
+        "type": "string",
+        "description": "Username required to post and get DHIS2",
+        "displayName": "Username",
+        "param": "username"
+      },
+      {
+        "type": "password",
+        "description": "Password required to post and get DHIS2",
+        "displayName": "Password",
+        "param": "password"
+      }
+    ],
+    "values": []
+    },
+    {
+    "param": "ihris",
+    "displayName": "iHRIS",
+    "description": "The ihris server to pull aggregate data from",
+    "type": "struct",
+    "template": [{
+        "type": "string",
+        "description": "The base URL",
+        "displayName": "URL",
+        "param": "url"
+      },
+      {
+        "type": "string",
+        "description": "Username required to post and get data",
+        "displayName": "Username",
+        "param": "username"
+      },
+      {
+        "type": "password",
+        "description": "Password required to post and get data",
+        "displayName": "Password",
+        "param": "password"
+      }
+    ],
+    "values": []
+  }],
+  "endpoints": [
+    {
+      "name": "openhim-mediator-ihris-dhis2-ug Route",
+      "host": "localhost",
+      "path": "/",
+      "port": "4000",
+      "primary": true,
+      "forwardAuthHeader": false,
+      "status": "enabled",
+      "type": "http"
+    }
+  ]
+}
